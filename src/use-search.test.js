@@ -1,5 +1,5 @@
 import { renderHook, cleanup } from 'react-hooks-testing-library'
-import useSearch from './use-search'
+import { useSearch } from './use-search'
 
 describe('useSearch', () => {
   let collection

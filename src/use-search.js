@@ -4,7 +4,7 @@ function defaultPredicate(item, query) {
   return item.includes(query)
 }
 
-function useSearch(
+export function useSearch(
   collection,
   { predicate = defaultPredicate, initialQuery = '' } = {}
 ) {
@@ -19,5 +19,3 @@ function useSearch(
 
   return [filteredCollection, query, handleChange]
 }
-
-export default useSearch
