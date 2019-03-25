@@ -1,21 +1,23 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
 function defaultPredicate(item, query) {
-  return item.includes(query)
+  return item.includes(query);
 }
 
 export function useSearch(
   collection,
-  { predicate = defaultPredicate, initialQuery = '' } = {}
+  { predicate = defaultPredicate, initialQuery = "" } = {}
 ) {
-  const [query, setQuery] = useState(initialQuery)
-  const [filteredCollection, setFilteredCollection] = useState(collection)
+  const [query, setQuery] = useState(initialQuery);
+  const [filteredCollection, setFilteredCollection] = useState(collection);
 
-  const handleChange = ({ target: { value } }) => setQuery(value)
+  function handleChange({ target: { value } }) {
+    setQuery(value);
+  }
 
   useEffect(() => {
-    setFilteredCollection(collection.filter(item => predicate(item, query)))
-  }, [query])
+    setFilteredCollection(collection.filter(item => predicate(item, query)));
+  }, [query]);
 
-  return [filteredCollection, query, handleChange]
+  return [filteredCollection, query, handleChange];
 }

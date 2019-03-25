@@ -60,5 +60,11 @@
   ],
   "dependencies": {
     "react-hooks-testing-library": "^0.3.8"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/**/index.js"
+    ]
   }
 }

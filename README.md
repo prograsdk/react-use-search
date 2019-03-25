@@ -12,13 +12,27 @@ yarn add react-use-search
 
 ## Usage
 
+The `useSearch` hooks takes a collection as first argument followed by an options object.
+
 ```jsx
-import React, { Component } from 'react'
-import useSearch from 'react-use-search'
+import React from 'react'
+import { useSearch } from 'react-use-search'
 
-function Search({ emails }) {
-  const [filtered] = useSearch(emails)
+function Search({ users }) {
+  function predicate(user, query) {
+    return user.name.includes(query)
+  }
 
-  return filtered.map(email => <p key={email}>{email</p>})
+  const [filteredUsers, query, handleChange] = useSearch(emails, { predicate })
+
+  return (
+    <>
+      <input value={query} onChange={handleChange} />
+
+      {filteredUsers.map(user => (
+        <User key={user.id} {...user} />
+      ))}
+    </>
+  )
 }
 ```
