@@ -1,13 +1,22 @@
-import React from 'react'
-
-import { useMyHook } from 'use-search'
+import React, { useEffect, useState } from "react";
+import Search from "./Search";
 
 const App = () => {
-  const example = useMyHook()
+  const [isLoading, setIsLoading] = useState(true);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(response => response.json())
+      .then(users => {
+        setUsers(users);
+        setIsLoading(false);
+      });
+  }, []);
+
   return (
-    <div>
-      {example}
-    </div>
-  )
-}
-export default App
+    <div>{isLoading ? <p>Loading users ...</p> : <Search users={users} />}</div>
+  );
+};
+
+export default App;

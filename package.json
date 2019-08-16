@@ -1,6 +1,6 @@
 {
   "name": "use-search",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "React hook for searching and filtering data",
   "author": "emilbaekdahl",
   "license": "MIT",
@@ -28,12 +28,14 @@
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/runtime": "^7.3.1",
+    "@testing-library/react-hooks": "^2.0.1",
     "@types/jest": "^23.3.13",
     "@types/react": "^16.7.22",
     "cross-env": "^5.2.0",
     "gh-pages": "^2.0.1",
     "react": "^16.8.6",
     "react-scripts": "^3.0.1",
+    "react-test-renderer": "^16.9.0",
     "rollup": "^1.1.2",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.2.0",

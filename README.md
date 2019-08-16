@@ -2,26 +2,32 @@
 
 > React hook for searching and filtering data
 
-[![NPM](https://img.shields.io/npm/v/use-search.svg)](https://www.npmjs.com/package/use-search) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/use-search.svg)](https://www.npmjs.com/package/use-search)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-npm install --save use-search
+yarn add react-use-search
 ```
 
 ## Usage
 
-```tsx
-import * as React from 'react'
+```jsx
+import React from 'react'
+import { useSearch } from 'react-use-search'
 
-import { useMyHook } from 'use-search'
+const predicate = (user, query) => user.name.includes(query)
 
-const Example = () => {
-  const example = useMyHook()
+const Users = ({ users }) => {
+  const [filteredUsers, query, handleChange] = useSearch(users, predicate)
+
   return (
     <div>
-      {example}
+      <input placeholder="Search users ..." value={query} onChange={handleChange} />
+      {filteredUsers.map(({ id, name }) => (
+        <div key={id}>{name}</div>
+      )}
     </div>
   )
 }
