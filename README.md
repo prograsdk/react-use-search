@@ -2,7 +2,7 @@
 
 > 🔍 React hook for searching and filtering data
 
-[![NPM](https://img.shields.io/npm/v/use-search.svg)](https://www.npmjs.com/package/react-use-search)
+[![NPM](https://img.shields.io/npm/v/react-use-search.svg)](https://www.npmjs.com/package/react-use-search)
 [![CircleCI](https://circleci.com/gh/prograsdk/react-use-search.svg?style=svg)](https://circleci.com/gh/prograsdk/react-use-search)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
