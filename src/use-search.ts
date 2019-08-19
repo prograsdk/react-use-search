@@ -17,11 +17,12 @@ export function useSearch<T>(
       query ? collection.filter(item => predicate(item, query)) : collection
   );
 
-  function handleChange({
-    target: { value }
-  }: React.ChangeEvent<HTMLInputElement>) {
-    setQuery(value);
-  }
+  const handleChange = React.useCallback(
+    ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
+      setQuery(value);
+    },
+    [setQuery]
+  );
 
   React.useEffect(() => {
     setFilteredCollection(collection.filter(item => predicate(item, query)));
