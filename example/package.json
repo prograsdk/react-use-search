@@ -5,6 +5,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@types/react-dom": "^16.8.5",
     "react": "link:../node_modules/react",
     "react-dom": "^16.8.6",
     "react-scripts": "^3.0.1",

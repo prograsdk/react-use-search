@@ -1,10 +1,19 @@
-import React from "react";
+import * as React from "react";
 import { useSearch } from "use-search";
 
-const predicate = (user, query) =>
+interface User {
+  id: number;
+  name: string;
+}
+
+interface Props {
+  users: Array<User>;
+}
+
+const predicate = (user: User, query: string): boolean =>
   user.name.toLowerCase().includes(query.toLowerCase());
 
-const Search = ({ users }) => {
+const Search = ({ users }: Props) => {
   const [filteredUsers, query, handleChange] = useSearch(users, predicate);
 
   return (

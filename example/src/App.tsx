@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import Search from "./Search";
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [users, setUsers] = React.useState([]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then(response => response.json())
       .then(users => {
