@@ -1,15 +1,17 @@
 import * as React from "react";
 
+type Predicate<T> = (item: T, query: string) => boolean;
+
 interface Options {
   initialQuery?: string;
 }
 
 export function useSearch<T>(
   collection: Array<T>,
-  predicate: (item: T, query: string) => boolean,
-  { initialQuery }: Options = {}
-) {
-  const [query, setQuery] = React.useState<string>(initialQuery || "");
+  predicate: Predicate<T>,
+  { initialQuery = "" }: Options = {}
+): [Array<T>, string, React.ChangeEventHandler<HTMLInputElement>] {
+  const [query, setQuery] = React.useState<string>(initialQuery);
   const [filteredCollection, setFilteredCollection] = React.useState<Array<T>>(
     () =>
       query ? collection.filter(item => predicate(item, query)) : collection
