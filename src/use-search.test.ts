@@ -13,14 +13,24 @@ describe('useSearch', () => {
     collection = ['test1@test.dk', 'test2@test.dk'];
   });
 
-  it('returns the entire collection', () => {
+  it('returns the entire collection if filter is true', () => {
+    const {
+      result: {
+        current: [filtered],
+      },
+    } = renderHook(() => useSearch(collection, predicate, {filter: true}));
+
+    expect(filtered).toEqual(collection);
+  });
+
+  it('returns empty collection if filter is not passed', () => {
     const {
       result: {
         current: [filtered],
       },
     } = renderHook(() => useSearch(collection, predicate));
 
-    expect(filtered).toEqual(collection);
+    expect(filtered).toEqual([]);
   });
 
   it('returns filtered collection if initialQuery is passed', () => {

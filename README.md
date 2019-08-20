@@ -14,7 +14,7 @@ yarn add react-use-search
 
 ## Usage
 
-```jsx
+```JSX
 import React from 'react'
 import { useSearch } from 'react-use-search'
 
