@@ -33,6 +33,9 @@
     "@types/react": "^16.7.22",
     "cross-env": "^5.2.0",
     "gh-pages": "^2.0.1",
+    "husky": "^3.0.4",
+    "lint-staged": ">=8",
+    "prettier": "^1.18.2",
     "react": "^16.8.6",
     "react-scripts": "^3.0.1",
     "react-test-renderer": "^16.9.0",
@@ -44,5 +47,17 @@
     "rollup-plugin-typescript2": "^0.19.2",
     "rollup-plugin-url": "^2.1.0",
     "typescript": "^3.2.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn test"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
