@@ -28,7 +28,9 @@
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build"
   },
-  "dependencies": {},
+  "dependencies": {
+    "lodash.debounce": "^4.0.8"
+  },
   "peerDependencies": {
     "react": "^16.8.6"
   },
@@ -38,6 +40,7 @@
     "@testing-library/react-hooks": "^2.0.1",
     "@types/jest": "^23.3.13",
     "@types/react": "^16.7.22",
+    "@types/lodash.debounce": "^4.0.6",
     "cross-env": "^5.2.0",
     "gh-pages": "^2.0.1",
     "husky": "^3.0.4",
