@@ -7,6 +7,19 @@ export interface Options {
   filter?: boolean;
 }
 
+function filterCollection<T>(
+  collection: Array<T>,
+  predicate: Predicate<T>,
+  query: string,
+  filter: boolean,
+): Array<T> {
+  if (query) {
+    return collection.filter(item => predicate(item, query));
+  } else {
+    return filter ? collection : [];
+  }
+}
+
 export function useSearch<T>(
   collection: Array<T>,
   predicate: Predicate<T>,
@@ -14,12 +27,7 @@ export function useSearch<T>(
 ): [Array<T>, string, React.ChangeEventHandler<HTMLInputElement>] {
   const [query, setQuery] = React.useState<string>(initialQuery);
   const [filteredCollection, setFilteredCollection] = React.useState<Array<T>>(
-    () =>
-      query
-        ? collection.filter(item => predicate(item, query))
-        : filter
-        ? collection
-        : [],
+    () => filterCollection<T>(collection, predicate, query, filter),
   );
 
   const handleChange = React.useCallback(
@@ -31,13 +39,9 @@ export function useSearch<T>(
 
   React.useEffect(() => {
     setFilteredCollection(
-      query
-        ? collection.filter(item => predicate(item, query))
-        : filter
-        ? collection
-        : [],
+      filterCollection<T>(collection, predicate, query, filter),
     );
-  }, [query, collection]);
+  }, [query, collection, predicate, filter]);
 
   return [filteredCollection, query, handleChange];
 }
