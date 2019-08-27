@@ -1,4 +1,5 @@
 import * as React from 'react';
+import _debounce from 'lodash.debounce';
 
 export type Predicate<T> = (item: T, query: string) => boolean;
 
@@ -21,10 +22,24 @@ function filterCollection<T>(
   }
 }
 
+function createEventHandler(
+  stateSetter: React.Dispatch<React.SetStateAction<string>>,
+  debounce?: number,
+): React.ChangeEventHandler<HTMLInputElement> {
+  const handler = ({target: {value}}: React.ChangeEvent<HTMLInputElement>) =>
+    stateSetter(value);
+
+  if (debounce) {
+    return _debounce(handler, debounce);
+  } else {
+    return handler;
+  }
+}
+
 export function useSearch<T>(
   collection: Array<T>,
   predicate: Predicate<T>,
-  {filter = false, initialQuery = ''}: Options = {},
+  {debounce, filter = false, initialQuery = ''}: Options = {},
 ): [Array<T>, string, React.ChangeEventHandler<HTMLInputElement>] {
   const [query, setQuery] = React.useState<string>(initialQuery);
   const [filteredCollection, setFilteredCollection] = React.useState<Array<T>>(
@@ -32,10 +47,8 @@ export function useSearch<T>(
   );
 
   const handleChange = React.useCallback(
-    ({target: {value}}: React.ChangeEvent<HTMLInputElement>) => {
-      setQuery(value);
-    },
-    [setQuery],
+    createEventHandler(setQuery, debounce),
+    [debounce, setQuery],
   );
 
   React.useEffect(() => {
