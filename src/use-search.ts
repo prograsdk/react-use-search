@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-type Predicate<T> = (item: T, query: string) => boolean;
+export type Predicate<T> = (item: T, query: string) => boolean;
 
-interface Options {
+export interface Options {
   initialQuery?: string;
   filter?: boolean;
 }
