@@ -5,6 +5,7 @@ export type Predicate<T> = (item: T, query: string) => boolean;
 export interface Options {
   initialQuery?: string;
   filter?: boolean;
+  debounce?: number;
 }
 
 function filterCollection<T>(
