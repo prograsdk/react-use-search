@@ -3,6 +3,13 @@
   "version": "0.2.0",
   "description": "React hook for searching and filtering data",
   "author": "emilbaekdahl",
+  "keywords": [
+    "react",
+    "search",
+    "filter",
+    "hook",
+    "typescript"
+  ],
   "license": "MIT",
   "repository": "prograsdk/react-use-search",
   "main": "dist/index.js",
