@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Debouning of the event handler returned from `useSearch`.
+## [0.2.2] - 2019-08-29
+
+### Added
+
+- A `debounce` (`number`) value can now be passed to the `useSearch` options.
 
 ## [0.2.1] - 2019-08-27
 
