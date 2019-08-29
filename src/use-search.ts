@@ -1,5 +1,5 @@
 import * as React from 'react';
-import _debounce from 'lodash.debounce';
+import lodashDebounce from 'lodash.debounce';
 
 export type Predicate<T> = (item: T, query: string) => boolean;
 
@@ -10,11 +10,11 @@ export interface Options {
 }
 
 function filterCollection<T>(
-  collection: Array<T>,
+  collection: T[],
   predicate: Predicate<T>,
   query: string,
   filter: boolean,
-): Array<T> {
+): T[] {
   if (query) {
     return collection.filter(item => predicate(item, query));
   } else {
@@ -22,40 +22,34 @@ function filterCollection<T>(
   }
 }
 
-function createEventHandler(
-  stateSetter: React.Dispatch<React.SetStateAction<string>>,
-  debounce?: number,
-): React.ChangeEventHandler<HTMLInputElement> {
-  const handler = ({target: {value}}: React.ChangeEvent<HTMLInputElement>) =>
-    stateSetter(value);
-
-  if (debounce) {
-    return _debounce(handler, debounce);
-  } else {
-    return handler;
-  }
-}
-
 export function useSearch<T>(
-  collection: Array<T>,
+  collection: T[],
   predicate: Predicate<T>,
   {debounce, filter = false, initialQuery = ''}: Options = {},
-): [Array<T>, string, React.ChangeEventHandler<HTMLInputElement>] {
+): [T[], string, React.ChangeEventHandler<HTMLInputElement>] {
   const [query, setQuery] = React.useState<string>(initialQuery);
-  const [filteredCollection, setFilteredCollection] = React.useState<Array<T>>(
-    () => filterCollection<T>(collection, predicate, query, filter),
+  const [filteredCollection, setFilteredCollection] = React.useState<T[]>(() =>
+    filterCollection<T>(collection, predicate, query, filter),
   );
 
   const handleChange = React.useCallback(
-    createEventHandler(setQuery, debounce),
-    [debounce, setQuery],
+    ({target: {value}}: React.ChangeEvent<HTMLInputElement>) => setQuery(value),
+    [setQuery],
+  );
+
+  const debouncedFilterCollection = React.useCallback(
+    lodashDebounce((collection, predicate, query, filter) => {
+      setFilteredCollection(
+        filterCollection(collection, predicate, query, filter),
+      );
+    }, debounce),
+    [debounce],
   );
 
   React.useEffect(() => {
-    setFilteredCollection(
-      filterCollection<T>(collection, predicate, query, filter),
-    );
-  }, [query, collection, predicate, filter]);
+    console.log('Filter')
+    debouncedFilterCollection(collection, predicate, query, filter);
+  }, [collection, predicate, query, filter]);
 
   return [filteredCollection, query, handleChange];
 }
