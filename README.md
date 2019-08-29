@@ -21,7 +21,7 @@ import { useSearch } from 'react-use-search'
 const predicate = (user, query) => user.name.includes(query)
 
 const Users = ({ users }) => {
-  const [filteredUsers, query, handleChange] = useSearch(users, predicate)
+  const [filteredUsers, query, handleChange] = useSearch(users, predicate, { debounce: 200 })
 
   return (
     <div>
