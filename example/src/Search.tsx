@@ -16,6 +16,7 @@ const predicate = (user: User, query: string): boolean =>
 const Search = ({users}: Props) => {
   const [filteredUsers, query, handleChange] = useSearch(users, predicate, {
     filter: true,
+    debounce: 200,
   });
 
   return (

@@ -1,17 +1,9 @@
 import {renderHook, act} from '@testing-library/react-hooks';
-import {useSearch} from './use-search';
+import {useSearch, Predicate} from './use-search';
 
 describe('useSearch', () => {
-  let collection;
-  let predicate;
-
-  beforeAll(() => {
-    predicate = (item, query) => item.includes(query);
-  });
-
-  beforeEach(() => {
-    collection = ['test1@test.dk', 'test2@test.dk'];
-  });
+  const collection = ['test1@test.dk', 'test2@test.dk'];
+  const predicate: Predicate<string> = (item, query) => item.includes(query);
 
   it('returns the entire collection if filter is true', () => {
     const {
@@ -53,5 +45,15 @@ describe('useSearch', () => {
     act(() => hook.result.current[2]({target: {value}}));
 
     expect(hook.result.current[1]).toEqual(value);
+  });
+
+  it('debounce', () => {
+    const {result} = renderHook(() =>
+      useSearch(collection, predicate, {debounce: 1000}),
+    );
+
+    act(() => result.current[2]({target: {value: 'test'}}));
+
+    expect(result.current[0]).toEqual([]);
   });
 });
