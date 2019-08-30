@@ -6,7 +6,7 @@
 [![CircleCI](https://circleci.com/gh/prograsdk/react-use-search.svg?style=svg)](https://circleci.com/gh/prograsdk/react-use-search)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-This React hook aims to provide a simple wat to implement search/filter functionality to use in React components.
+This React hook aims to provide a simple way to implement search/filter functionality in React components.
 
 ## Install
 
