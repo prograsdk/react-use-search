@@ -47,7 +47,6 @@ export function useSearch<T>(
   );
 
   React.useEffect(() => {
-    console.log('Filter')
     debouncedFilterCollection(collection, predicate, query, filter);
   }, [collection, predicate, query, filter]);
 
