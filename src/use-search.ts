@@ -38,7 +38,7 @@ export function useSearch<T>(
   );
 
   const debouncedFilterCollection = React.useCallback(
-    lodashDebounce((collection, predicate, query, filter) => {
+    lodashDebounce((collection: T[], predicate: Predicate<T>, query: string, filter: boolean) => {
       setFilteredCollection(
         filterCollection(collection, predicate, query, filter),
       );
