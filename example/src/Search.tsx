@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useSearch} from 'use-search';
+import {useSearch} from 'react-use-search';
 
 interface User {
   id: number;
