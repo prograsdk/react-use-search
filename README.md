@@ -106,7 +106,7 @@ It has the following properties:
 
 ## License
 
-MIT © [emilbaekdahl](https://github.com/emilbaekdahl)
+MIT © [Progras ApS](https://github.com/prograsdk)
 
 ---
 
