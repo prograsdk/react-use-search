@@ -29,7 +29,7 @@ export function useSearch<T>(
 ): [
   T[],
   string,
-  React.ChangeEventHandler<HTMLInputElement> | ((query: string) => void)
+  (event: React.ChangeEvent<HTMLInputElement> | string) => void
 ] {
   const [query, setQuery] = React.useState<string>(initialQuery);
   const [filteredCollection, setFilteredCollection] = React.useState<T[]>(() =>

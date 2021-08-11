@@ -1,5 +1,5 @@
-import * as React from 'react';
-import {useSearch} from 'react-use-search';
+import * as React from "react";
+import { useSearch } from "react-use-search";
 
 interface User {
   id: number;
@@ -13,7 +13,7 @@ interface Props {
 const predicate = (user: User, query: string): boolean =>
   user.name.toLowerCase().includes(query.toLowerCase());
 
-const Search = ({users}: Props) => {
+const Search = ({ users }: Props) => {
   const [filteredUsers, query, handleChange] = useSearch(users, predicate, {
     filter: true,
     debounce: 200,
@@ -29,7 +29,7 @@ const Search = ({users}: Props) => {
         placeholder="Search ..."
       />
 
-      {filteredUsers.map(user => (
+      {filteredUsers.map((user) => (
         <div key={user.id}>{user.name}</div>
       ))}
     </div>
