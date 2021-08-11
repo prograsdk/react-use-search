@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.7] - 2021-08-11
+
+### Added
+
+ - The event handler type introduced in v0.2.6 is now actually reflected in the return type of `useSearch`.
+
 ## [0.2.6] - 2021-08-11
 
 ### Added
