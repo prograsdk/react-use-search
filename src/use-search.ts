@@ -26,7 +26,11 @@ export function useSearch<T>(
   collection: T[],
   predicate: Predicate<T>,
   { debounce, filter = false, initialQuery = "" }: Options = {}
-): [T[], string, React.ChangeEventHandler<HTMLInputElement>] {
+): [
+  T[],
+  string,
+  React.ChangeEventHandler<HTMLInputElement> | ((query: string) => void)
+] {
   const [query, setQuery] = React.useState<string>(initialQuery);
   const [filteredCollection, setFilteredCollection] = React.useState<T[]>(() =>
     filterCollection<T>(collection, predicate, query, filter)
