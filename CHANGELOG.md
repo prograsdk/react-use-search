@@ -7,10 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.6] - 2021-08-11
+
+### Added
+
+ - The input event handler return by `useSearch` is now typed to handle the `onChangeText` event (`(text: string) => void`) in React Native.
+
 ## [0.2.5] - 2020-08-17
 
 ### Added
- 
+
  - Published package now includes `.es.js` and `.d.ts` files.
 
 ## [0.2.4] - 2020-08-17
