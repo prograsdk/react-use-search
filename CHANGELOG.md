@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2021-08-12
+
+### Added
+
+ - `useSearch` now returns a `setQuery` function for programmatically updating the query string.
+
 ## [0.2.8] - 2021-08-11
 
 ### Added
