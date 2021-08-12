@@ -29,7 +29,8 @@ export function useSearch<T>(
 ): [
   T[],
   string,
-  (event: React.ChangeEvent<HTMLInputElement> | string) => void
+  (event: React.ChangeEvent<HTMLInputElement> | string) => void,
+  (querty: string) => void
 ] {
   const [query, setQuery] = React.useState<string>(initialQuery);
   const [filteredCollection, setFilteredCollection] = React.useState<T[]>(() =>
@@ -64,5 +65,5 @@ export function useSearch<T>(
     debouncedFilterCollection(collection, predicate, query, filter);
   }, [collection, predicate, query, filter]);
 
-  return [filteredCollection, query, handleChange];
+  return [filteredCollection, query, handleChange, setQuery];
 }
