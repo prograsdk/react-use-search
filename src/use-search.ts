@@ -32,6 +32,7 @@ export function useSearch<T>(
   (event: React.ChangeEvent<HTMLInputElement> | string) => void,
   (querty: string) => void
 ] {
+  const isMounted = React.useRef<boolean>(false);
   const [query, setQuery] = React.useState<string>(initialQuery);
   const [filteredCollection, setFilteredCollection] = React.useState<T[]>(() =>
     filterCollection<T>(collection, predicate, query, filter)
@@ -52,9 +53,11 @@ export function useSearch<T>(
         query: string,
         filter: boolean
       ) => {
-        setFilteredCollection(
-          filterCollection(collection, predicate, query, filter)
-        );
+        if (isMounted.current) {
+          setFilteredCollection(
+            filterCollection(collection, predicate, query, filter)
+          );
+        }
       },
       debounce
     ),
@@ -64,6 +67,14 @@ export function useSearch<T>(
   React.useEffect(() => {
     debouncedFilterCollection(collection, predicate, query, filter);
   }, [collection, predicate, query, filter]);
+
+  React.useEffect(() => {
+    isMounted.current = true;
+
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   return [filteredCollection, query, handleChange, setQuery];
 }
