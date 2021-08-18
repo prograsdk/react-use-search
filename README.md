@@ -29,7 +29,7 @@ yarn add react-use-search
  * `options:`[`Options`](#options): 
  configuration object.
 
-The hook returns a 3-tuple of type `[T[], string, React.ChangeEventHandler<HTMLInputElement>]` consisting of the following elements:
+The hook returns a 4-tuple of type `[T[], string, React.ChangeEventHandler<HTMLInputElement>, (query: string) => void]` consisting of the following elements:
 
  * `T[]`:
  A filtered version of `collection` passed to `useSearch`.
@@ -40,6 +40,9 @@ The hook returns a 3-tuple of type `[T[], string, React.ChangeEventHandler<HTMLI
  * `React.ChangeEventHandler<HTMLInputElement>`:
  An event handler for an HTML input element.
  This is to be passes to the search input element as its `onChange` prop.
+ 
+ * `(query: text) => void`:
+ A function to programatically set the query value
 
 The example show a simple component listing users that can be searched by email.
 
@@ -51,12 +54,13 @@ import User from './User'
 const predicate = (user, query) => user.email.includes(query)
 
 const UserList = ({users}) => {
-  const [filteredUsers, query, handleChange] = useSearch(users, predicate, {debounce: 200})
+  const [filteredUsers, query, handleChange, setQuery] = useSearch(users, predicate, {debounce: 200})
 
   return (
     <div>
       <input placeholder="Search users by email..." value={query} onChange={handleChange} />
       {filteredUsers.map(user => <User key={user.id} {...user} />)}
+      <button onClick={() => setQuery('@example')}>Search for @example addresses</button>
     </div>
   )
 }
@@ -81,7 +85,7 @@ The parameters of the function are:
 import {Predicate} from 'react-use-search'
 
 interface User {
-  // ...
+  email: string;
 }
 
 const predicate: Predicate<User> = (user, query) => user.email.includes(query)
@@ -96,7 +100,7 @@ It has the following properties:
  The query used for the initial collection returned from `useSearch`.
  
  * `filter?: boolean`: 
- Determines if `useSearch` should behave in a _filtering_ or _searching_ like manner (according to [this definition on StackExchange](https://ux.stackexchange.com/a/4756)):
+ Determines if `useSearch` should behave in a _filtering_ or _searching_ like manner (according to [this definition on StackExchange](https://ux.stackexchange.com/a/4756)).
  If `true`, all elements in `collection` are returned if the current query is empty;
  if `false` (default), an empty array is returned.
  
