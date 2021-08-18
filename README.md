@@ -42,7 +42,7 @@ The hook returns a 4-tuple of type `[T[], string, React.ChangeEventHandler<HTMLI
  This is to be passes to the search input element as its `onChange` prop.
  
  * `(query: text) => void`:
- A function to programatically set the query value
+ A function to programmatically set the query value
 
 The example show a simple component listing users that can be searched by email.
 
