@@ -1,5 +1,7 @@
 import * as React from "react";
 import lodashDebounce from "lodash.debounce";
+import lodashIsEqual from "lodash.isequal";
+import usePrevious from "./use-previous";
 
 export type Predicate<T> = (item: T, query: string) => boolean;
 
@@ -34,6 +36,10 @@ export function useSearch<T>(
 ] {
   const isMounted = React.useRef<boolean>(false);
   const [query, setQuery] = React.useState<string>(initialQuery);
+  const prevCollection = usePrevious(collection);
+  const prevPredicate = usePrevious(predicate);
+  const prevQuery = usePrevious(query);
+  const prevFilter = usePrevious(filter);
   const [filteredCollection, setFilteredCollection] = React.useState<T[]>(() =>
     filterCollection<T>(collection, predicate, query, filter)
   );
@@ -65,7 +71,13 @@ export function useSearch<T>(
   );
 
   React.useEffect(() => {
-    debouncedFilterCollection(collection, predicate, query, filter);
+    if (
+      !lodashIsEqual(collection, prevCollection) ||
+      !lodashIsEqual(predicate, prevPredicate) ||
+      !lodashIsEqual(query, prevQuery) ||
+      !lodashIsEqual(filter, prevFilter)
+    )
+      debouncedFilterCollection(collection, predicate, query, filter);
   }, [collection, predicate, query, filter]);
 
   React.useEffect(() => {
